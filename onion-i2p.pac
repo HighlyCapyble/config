@@ -7,11 +7,6 @@
 //   then those are loaded without a proxy, which can leak your location
 //   and/or identity. This is NOT A REPLACEMENT FOR A FULL TOR BROWSER CONFIG
 
-// Edit these arrays to add other hosts matching patterns you want to route
-//   using a privacy network
-const ToR_Hosts = new Array("*.onion");  // Array of shExp patterns; a hostname that matches will route over ToR
-const I2P_Hosts = new Array("*.i2p");    // Array of shExp patterns; a hostname that matches will route over I2P
-
 function FindProxyForURL(url, host) { 
 	proto_spec = "DIRECT";
 	if (shExpMatch(host, "*.onion")) { proto_spec="SOCKS5 127.0.0.1:9050"; found_match=true; }  // set ToR as soon as a pattern matches
