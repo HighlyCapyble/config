@@ -14,15 +14,8 @@ const I2P_Hosts = new Array("*.i2p");    // Array of shExp patterns; a hostname 
 
 function FindProxyForURL(url, host) { 
 	proto_spec = "DIRECT";
-  found_match = false;
- 	Tor_Hosts.forEach(function(pattern, index, array) {
-		if (found_match) { return; }
-		if (shExpMatch(host, pattern)) { proto_spec="SOCKS5 127.0.0.1:9050"; found_match=true; return; }  // set ToR as soon as a pattern matches
-	});
- 	I2P_Hosts.forEach(function(pattern, index, array) {
-	  if (found_match) { return; }
-		if (shExpMatch(host, pattern)) { proto_spec="SOCKS5 127.0.0.1:4447"; found_match=true; return; }  // set ToR as soon as a pattern matches
-	});
+	if (shExpMatch(host, "*.onion")) { proto_spec="SOCKS5 127.0.0.1:9050"; found_match=true; }  // set ToR as soon as a pattern matches
+	if (shExpMatch(host, "*.i2p")) { proto_spec="SOCKS5 127.0.0.1:4447"; found_match=true; }  // set I2P as soon as a pattern matches
 
 	return proto_spec;
 }
