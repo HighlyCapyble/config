@@ -8,9 +8,8 @@
 //   and/or identity. This is NOT A REPLACEMENT FOR A FULL TOR BROWSER CONFIG
 
 function FindProxyForURL(url, host) { 
-	proto_spec = "DIRECT";
-	if (shExpMatch(host, "*.onion")) { proto_spec="SOCKS5 127.0.0.1:9050"; found_match=true; }  // set ToR as soon as a pattern matches
-	if (shExpMatch(host, "*.i2p")) { proto_spec="SOCKS5 127.0.0.1:4447"; found_match=true; }  // set I2P as soon as a pattern matches
+	if (shExpMatch(host, "*.onion")) { return "SOCKS5 127.0.0.1:9050"; }  // set ToR as soon as a pattern matches
+	if (shExpMatch(host, "*.i2p")) { return "SOCKS5 127.0.0.1:4447"; }    // set I2P as soon as a pattern matches
 
-	return proto_spec;
+	return "DIRECT";
 }
